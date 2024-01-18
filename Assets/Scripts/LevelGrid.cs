@@ -8,7 +8,7 @@ public class LevelGrid : MonoBehaviour
 
     [SerializeField] private Transform gridDebugObjectPrefab;
 
-    GridSystem gridSystem;
+    private GridSystem gridSystem;
 
     private void Awake()
     {
@@ -50,4 +50,18 @@ public class LevelGrid : MonoBehaviour
     }
 
     public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
+
+    public Vector3 GetWorldPosition(GridPosition gridPosition) => gridSystem.GetWorldPosition(gridPosition);
+
+    public int GetWidth() => gridSystem.GetWidth();
+
+    public int GetHeight() => gridSystem.GetHeight();
+
+    public bool IsValidGridPosition(GridPosition gridPosition) => gridSystem.IsValidGridPosition(gridPosition);
+
+    public bool HasAnyUnitOnGridPosition(GridPosition gridPosition)
+    {
+        GridObject gridObject = gridSystem.GetGridObject(gridPosition);
+        return gridObject.HasAnyUnit();
+    }
 }
