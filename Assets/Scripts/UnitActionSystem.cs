@@ -69,6 +69,8 @@ public class UnitActionSystem : MonoBehaviour
             {
                 if (raycastHit.collider.transform.TryGetComponent<Unit>(out Unit unit))
                 {
+                    if (unit == selectedUnit) return false;
+
                     SetSelectedUnit(unit);
                     return true;
                 }
