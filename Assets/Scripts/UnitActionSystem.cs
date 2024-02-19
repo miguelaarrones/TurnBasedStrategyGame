@@ -90,4 +90,6 @@ public class UnitActionSystem : MonoBehaviour
     public void SetSelectedAction(BaseAction baseAction) => selectedAction = baseAction;
 
     public Unit GetSelectedUnit() => selectedUnit;
+    
+    public BaseAction GetSelectedAction() => selectedAction;
 }
