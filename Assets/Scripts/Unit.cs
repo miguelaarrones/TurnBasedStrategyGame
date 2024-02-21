@@ -51,6 +51,8 @@ public class Unit : MonoBehaviour
     public SpinAction GetSpinAction() => spinAction;
 
     public GridPosition GetGridPosition() => gridPosition;
+
+    public Vector3 GetWorldPosition() => transform.position;
     
     public BaseAction[] GetBaseActionArray() => baseActionArray;
 
@@ -88,4 +90,9 @@ public class Unit : MonoBehaviour
     }
 
     public bool IsEnemy() => isEnemy;
+
+    public void Damage()
+    {
+        Debug.Log(transform + " damaged!");
+    }
 }
