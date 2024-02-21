@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class MoveAction : BaseAction
 {
-    private const string UNIT_ISWALKING = "IsWalking";
+    public event EventHandler OnStartMoving;
+    public event EventHandler OnStopMoving;
 
-    [SerializeField] private Animator unitAnimator;
     [SerializeField] private int maxMoveDistance = 4;
 
     private Vector3 targetPosition;
@@ -32,12 +31,10 @@ public class MoveAction : BaseAction
         {
             float moveSpeed = 4f;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
-
-            unitAnimator.SetBool(UNIT_ISWALKING, true);
         }
         else
         {
-            unitAnimator.SetBool(UNIT_ISWALKING, false);
+            OnStopMoving?.Invoke(this, EventArgs.Empty);
 
             ActionComplete();
         }
@@ -51,6 +48,8 @@ public class MoveAction : BaseAction
         ActionStart(onActionComplete);
 
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()
