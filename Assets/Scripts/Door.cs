@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IInteractable
 {
     private const string DOOR_IS_OPEN = "IsOpen";
 
     [SerializeField] private bool isOpen;
     private GridPosition gridPosition;
     private Animator animator;
-    private Action onInteractComplete;
+    private Action onInteractionComplete;
     private bool isActive;
     private float timer;
 
@@ -42,13 +42,13 @@ public class Door : MonoBehaviour
         if (timer < 0)
         {
             isActive = false;
-            onInteractComplete();
+            onInteractionComplete();
         }
     }
 
     public void Interact(Action onInteractComplete)
     {
-        this.onInteractComplete = onInteractComplete;
+        this.onInteractionComplete = onInteractComplete;
 
         isActive = true;
         timer = .5f;
