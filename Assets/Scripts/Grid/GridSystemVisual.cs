@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using static GridSystemVisual;
 
 public class GridSystemVisual : MonoBehaviour
 {
@@ -44,13 +45,13 @@ public class GridSystemVisual : MonoBehaviour
     {
         gridSystemVisualSingleArray = new GridSystemVisualSingle[LevelGrid.Instance.GetWidth(), LevelGrid.Instance.GetHeight()];
 
-        for (int x = 0; x < LevelGrid.Instance.GetWidth();  x++)
+        for (int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
         {
-            for(int z = 0; z < LevelGrid.Instance.GetHeight();  z++)
+            for (int z = 0; z < LevelGrid.Instance.GetHeight(); z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
                 Transform gridSystemVisualSingleTransform = Instantiate(gridSystemVisualSinglePrefab, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity);
-                
+
                 gridSystemVisualSingleArray[x, z] = gridSystemVisualSingleTransform.GetComponent<GridSystemVisualSingle>();
             }
         }
