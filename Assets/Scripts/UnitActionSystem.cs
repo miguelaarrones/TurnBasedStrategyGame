@@ -32,6 +32,33 @@ public class UnitActionSystem : MonoBehaviour
     private void Start()
     {
         SetSelectedUnit(selectedUnit);
+
+        TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
+    }
+
+    private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
+    {
+        if (!TurnSystem.Instance.IsPlayerTurn())
+        {
+            return;
+        }
+
+        if (selectedUnit != null)
+        {
+            return;
+        }
+
+        List<Unit> friendlyUnitList = UnitManager.Instance.GetFriendlyUnitList();
+        if (friendlyUnitList.Count == 0)
+        {
+            // TODO: Update Unit Manager to check if friendlyUnitList.Count == 0
+            //             and to implement GAME OVER scene if it is. Then remove this check. 
+            Debug.Log("Your team is not responding! This can't be good.");
+        }
+        else
+        {
+            SetSelectedUnit(friendlyUnitList[0]);
+        }
     }
 
     private void Update()
